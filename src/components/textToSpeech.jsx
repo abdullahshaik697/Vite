@@ -1,7 +1,5 @@
 // import React, { useState , useEffect} from "react";
 
-import { useEffect, useState } from "react";
-
 // function TextToSpeech() {
 //   const [text, setText] = useState("");
 //   const [voice, setVoice] = useState(null);
@@ -86,22 +84,24 @@ import { useEffect, useState } from "react";
 
 
 
+
+
+import { useState } from "react";
+
 const TextToSpeech = () => {
 
-    const [voices, setVoices] = useState([])
     const [text, setText] = useState()
 
-    useEffect(() => {
-        const synth = window.speechSynthesis;
-        const loadVoices = () => {
-            setVoices(synth.getVoices());
-            console.log(synth);
-            console.log(voices);
+    const handleClick = () => {
+        if (!text){
+             alert("Please enter some text to speak!");
 
-        };
-        synth.onvoiceschanged = loadVoices;
-        loadVoices();
-    }, [])
+        } else{
+            const utterance = new SpeechSynthesisUtterance(text);
+            window.speechSynthesis.speak(utterance);
+
+        }
+    }
 
     return (
 
@@ -116,24 +116,12 @@ const TextToSpeech = () => {
                 className="w-full max-w-md h-32 p-2 border rounded-md shadow-sm mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
 
-            <select
-                className="w-full max-w-md p-2 border rounded-md shadow-sm mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-           
-           >
-                <option value="">Default Voice</option>
-
-                {voices.map((v, i) => (
-                    <option key={i}>{v.name} {v.lang}</option>
-                ))}
-            </select>
-
-
             <button
-       
-         className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600"
-       >
-         Speak
-       </button>
+                onClick={handleClick}
+                className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600"
+            >
+                Speak
+            </button>
 
         </>
     )

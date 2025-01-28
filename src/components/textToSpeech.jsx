@@ -91,15 +91,13 @@ import { useState } from "react";
 const TextToSpeech = () => {
 
     const [text, setText] = useState()
-
     const handleClick = () => {
-        if (!text){
-             alert("Please enter some text to speak!");
+        if (!text) {
+            alert("Please enter some text to speak!");
 
-        } else{
+        } else {
             const utterance = new SpeechSynthesisUtterance(text);
             window.speechSynthesis.speak(utterance);
-
         }
     }
 
@@ -107,21 +105,24 @@ const TextToSpeech = () => {
 
         <>
 
-            <h1 className="text-2xl font-bold mb-4">Text to Speech App</h1>
+            <div className="container flex items-center border-4 m-auto my-2 rounded-2xl p-4 align-center flex-col">
 
-            <textarea
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                placeholder="Type something..."
-                className="w-full max-w-md h-32 p-2 border rounded-md shadow-sm mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+                <h1 className="text-2xl font-bold mb-4">Text to Speech App</h1>
 
-            <button
-                onClick={handleClick}
-                className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600"
-            >
-                Speak
-            </button>
+                <textarea
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                    placeholder="Type something..."
+                    className="w-full text-lg h-56 p-2 border-1 mb-4 rounded-md"
+                />
+
+                <button
+                    onClick={handleClick}
+                    className="px-4 py-2 w-xs bg-blue-500 text-white rounded hover:bg-blue-600"
+                >
+                    Speak
+                </button>
+            </div>
 
         </>
     )
